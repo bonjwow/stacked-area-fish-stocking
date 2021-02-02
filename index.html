@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.js"></script>
+
+    <style>
+        text {
+            font: 12px sans-serif;
+        }
+        svg {
+            display: block;
+        }
+        html, body, svg {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class='with-3d-shadow with-transitions'>
+<button onclick="expandLegend();">Expand/Contract Legend</button>
+    <script>
+        var expandLegend = function() {
+            var exp = chart.legend.expanded();
+            chart.legend.expanded(!exp);
+            chart.update();
+        }
+    </script>
+<svg id="chart1"></svg>
+
+<script>
+/*
+Unix Timestamp
+2011 = 1293840000
+2012 = 1325376000
+2013 = 1356998400
+2014 = 1388534400
+2015 = 1420070400
+2016 = 1451606400
+2017 = 1483228800
+2018 = 1514764800
+2019 = 1546300800
+2020 = 1577836800
+2021 = 1609459200
+*/
+
+
+    var histcatexplong = [
+        {
+            "key" : "Atlantic Salmon" ,
+            "values" : [ 
+                [ 1325376000000 , 0] , 
+                [ 1356998400000 , 0] , 
+                [ 1388534400000 , 0] , 
+                [ 1420070400000 , 0] , 
+                [ 1451606400000 , 0] , 
+                [ 1483228800000 , 25004] , 
+                [ 1514764800000 , 0] , 
+                [ 1546300800000 , 416] , 
+                [ 1577836800000 , 597] , 
+                [ 1609459200000 , 0] 
+            ]
+        } ,
+        {
+            "key" : "Aurora Trout" ,
+            "values" : [ 
+                [ 1325376000000 , 25322] , 
+                [ 1356998400000 , 27412] , 
+                [ 1388534400000 , 0] , 
+                [ 1420070400000 , 400] , 
+                [ 1451606400000 , 48222] , 
+                [ 1483228800000 , 136] , 
+                [ 1514764800000 , 22505] , 
+                [ 1546300800000 , 15716] , 
+                [ 1577836800000 , 3895] , 
+                [ 1609459200000 , 0] 
+            ]
+        } ,
+        {
+            "key" : "Brook Trout" ,
+            "values" : [ 
+                [ 1325376000000 , 988405] , 
+                [ 1356998400000 , 997511] , 
+                [ 1388534400000 , 863717] , 
+                [ 1420070400000 , 995279] , 
+                [ 1451606400000 , 723972] , 
+                [ 1483228800000 , 952410] , 
+                [ 1514764800000 , 852157] , 
+                [ 1546300800000 , 1068358] , 
+                [ 1577836800000 , 813495] , 
+                [ 1609459200000 , 682281] 
+            ]
+        } ,
+        {
+            "key" : "Brown Trout" ,
+            "values" : [ 
+                [ 1325376000000 , 280069] , 
+                [ 1356998400000 , 265434] , 
+                [ 1388534400000 , 273817] , 
+                [ 1420070400000 , 262267] , 
+                [ 1451606400000 , 295022] , 
+                [ 1483228800000 , 269766] , 
+                [ 1514764800000 , 249799] , 
+                [ 1546300800000 , 250405] , 
+                [ 1577836800000 , 245783] , 
+                [ 1609459200000 , 219791] 
+            ]
+        } ,
+        {
+            "key" : "Chinook Salmon" ,
+            "values" : [ 
+                [ 1325376000000 , 0] , 
+                [ 1356998400000 , 491516] , 
+                [ 1388534400000 , 588647] , 
+                [ 1420070400000 , 492247] , 
+                [ 1451606400000 , 440549] , 
+                [ 1483228800000 , 308190] , 
+                [ 1514764800000 , 260506] , 
+                [ 1546300800000 , 196554] , 
+                [ 1577836800000 , 203040] , 
+                [ 1609459200000 , 382415] 
+            ]
+        } ,
+        {
+            "key" : "Lake  Whitefish" ,
+            "values" : [ 
+                [ 1325376000000 , 142880] , 
+                [ 1356998400000 , 139106] , 
+                [ 1388534400000 , 123865] , 
+                [ 1420070400000 , 146055] , 
+                [ 1451606400000 , 145219] , 
+                [ 1483228800000 , 140908] , 
+                [ 1514764800000 , 106310] , 
+                [ 1546300800000 , 144376] , 
+                [ 1577836800000 , 140981] , 
+                [ 1609459200000 , 149184] 
+            ]
+        } ,
+        {
+            "key" : "Lake Trout" ,
+            "values" : [ 
+                [ 1325376000000 , 318049] , 
+                [ 1356998400000 , 225338] , 
+                [ 1388534400000 , 385884] , 
+                [ 1420070400000 , 410647] , 
+                [ 1451606400000 , 346184] , 
+                [ 1483228800000 , 427526] , 
+                [ 1514764800000 , 266895] , 
+                [ 1546300800000 , 250482] , 
+                [ 1577836800000 , 362904] , 
+                [ 1609459200000 , 214162] 
+            ]
+        } ,
+        {
+            "key" : "Rainbow Trout" ,
+            "values" : [ 
+                [ 1325376000000 , 369622] , 
+                [ 1356998400000 , 356817] , 
+                [ 1388534400000 , 255102] , 
+                [ 1420070400000 , 292191] , 
+                [ 1451606400000 , 378295] , 
+                [ 1483228800000 , 200624] , 
+                [ 1514764800000 , 392686] , 
+                [ 1546300800000 , 386423] , 
+                [ 1577836800000 , 356251] , 
+                [ 1609459200000 , 312845] 
+            ]
+        } ,
+        {
+            "key" : "Splake" ,
+            "values" : [ 
+                [ 1325376000000 , 590990] , 
+                [ 1356998400000 , 612235] , 
+                [ 1388534400000 , 548393] , 
+                [ 1420070400000 , 599839] , 
+                [ 1451606400000 , 492351] , 
+                [ 1483228800000 , 570464] , 
+                [ 1514764800000 , 633678] , 
+                [ 1546300800000 , 588145] , 
+                [ 1577836800000 , 519895] , 
+                [ 1609459200000 , 419974] 
+            ]
+        } ,
+        {
+            "key" : "Walleye" ,
+            "values" : [ 
+                [ 1325376000000 , 187547] , 
+                [ 1356998400000 , 35250] , 
+                [ 1388534400000 , 42774] , 
+                [ 1420070400000 , 23567] , 
+                [ 1451606400000 , 75722] , 
+                [ 1483228800000 , 136554] , 
+                [ 1514764800000 , 105001] , 
+                [ 1546300800000 , 66743] , 
+                [ 1577836800000 , 160607] , 
+                [ 1609459200000 , 0] 
+            ]
+        }
+    ];
+
+    var colors = d3.scale.category20();
+    var chart;
+
+    nv.addGraph(function() {
+        chart = nv.models.stackedAreaWithFocusChart()
+            .useInteractiveGuideline(true)
+            .x(function(d) { return d[0] })
+            .y(function(d) { return d[1] })
+            .controlLabels({stacked: "Stacked"})
+            .duration(300);
+        // Focus start and end
+        chart.brushExtent([1293840000000, 1609459200000]);
+
+        /*
+        chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y')(new Date(d)) });
+        chart.x2Axis.tickFormat(function(d) { return d3.time.format('%Y')(new Date(d)) });
+        */
+        chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y')(new Date(d)) });
+        chart.x2Axis.tickFormat(function(d) { return d3.time.format('%Y')(new Date(d)) });
+        chart.yAxis.tickFormat(d3.format(',.0f'));
+        chart.y2Axis.tickFormat(d3.format(',.0f'));
+
+        chart.legend.vers('furious');
+
+        d3.select('#chart1')
+            .datum(histcatexplong)
+            .transition().duration(1000)
+            .call(chart)
+            .each('start', function() {
+                setTimeout(function() {
+                    d3.selectAll('#chart1 *').each(function() {
+                        if(this.__transition__)
+                            this.__transition__.duration = 1;
+                    })
+                }, 0)
+            });
+
+        nv.utils.windowResize(chart.update);
+        return chart;
+    });
+
+
+</script>
+</body>
+</html>
